@@ -1,0 +1,55 @@
+_type: prompt
+input_variables:
+  - question
+  - llm_response
+  - ground_truth
+
+template: |2
+  You are an evaluator. Given the question, llm_response, and ground_truth, classify the LLM response into one of three categories: (i) Fully Correct, (ii) Partially Correct, (iii) Incorrect.
+
+  1. Fully Correct
+  Definition: The LLM output is semantically accurate and complete, fully addressing the user's query or task. It may not match the reference (ground truth) word-for-word, but it conveys the same meaning and includes all necessary information without errors.
+  Key Traits:
+  - Correct facts and reasoning
+  - No significant omissions or inaccuracies
+  - Equivalent in meaning to the expected answer, even if phrased differently
+
+  2. Partially Correct
+  Definition: The LLM output contains some correct information, but it is either incomplete, partially inaccurate, or only partially addresses the user's query. It may be helpful but requires clarification, correction, or supplementation.
+  Key Traits:
+  - Mix of correct and incorrect or missing elements
+  - Misinterpretation of part of the query
+  - Useful but not fully reliable without revision
+  - If a date in answer is incorrect, then answer is Incorrect.
+
+  3. Incorrect
+  Definition: The LLM output is mostly or entirely incorrect, failing to address the user's query meaningfully. It may misinterpret the intent, provide false or misleading information, or be irrelevant.
+  Key Traits:
+  - Major factual or logical errors
+  - Off-topic or misleading content
+  - Not useful for the intended task
+
+  Example 1:
+  question: What is the location of the company?
+  llm_response: The location of the company is Madrid
+  ground_truth: Madrid
+  Classification: Fully Correct
+
+  Example 2
+  question: What is the location of the company?
+  llm_response: The location of the company is Paseo de la Castellana 259E
+  ground_truth: Madrid
+  Classification: Partially Correct
+
+  Example 3:
+  question: What is the location of the company?
+  llm_response: The location of the company is Berlin
+  ground_truth: Madrid
+  Classification: Incorrect
+
+  User Input:
+  question: {question}
+  llm_response: {llm_response}
+  ground_truth: {ground_truth}
+
+  Classification:

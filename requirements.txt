@@ -1,0 +1,6 @@
+openai>=1.0.0
+PyPDF2>=3.0.0
+numpy>=1.24.0
+pyyaml>=6.0
+panel>=1.0.0
+jupyter_bokeh>=4.0.0
